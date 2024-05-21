@@ -24,7 +24,7 @@ class RealESRGANDataset(data.Dataset):
 
     Args:
         opt (dict): Config for train datasets. It contains the following keys:
-            dataroot_gt (str): Data root path for gt.
+            dataroot_gt (str): Data root path for gt. /mnt/d/Dev/Projects/Lume/super_resolution/datasets/output/original_imgs
             meta_info (str): Path for meta information file.
             io_backend (dict): IO backend type and other kwarg.
             use_hflip (bool): Use horizontal flips.
@@ -38,6 +38,7 @@ class RealESRGANDataset(data.Dataset):
         self.file_client = None
         self.io_backend_opt = opt['io_backend']
         self.gt_folder = opt['dataroot_gt']
+        print(f"gt_folder==>{self.gt_folder}")
 
         # file client (lmdb io backend)
         if self.io_backend_opt['type'] == 'lmdb':
@@ -91,6 +92,7 @@ class RealESRGANDataset(data.Dataset):
         retry = 3
         while retry > 0:
             try:
+                # print(f"======>{gt_path}") # /mnt/d/Dev/Projects/Lume/super_resolution/datasets/train/02_frame_005601_reflectance.png
                 img_bytes = self.file_client.get(gt_path, 'gt')
             except (IOError, OSError) as e:
                 logger = get_root_logger()

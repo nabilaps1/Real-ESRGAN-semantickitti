@@ -1,7 +1,7 @@
 # general settings
 name: finetune_RealESRGANx4plus_400k_pairdata
 model_type: RealESRGANModel
-scale: 4
+scale: 1
 num_gpu: auto
 manual_seed: 0
 
@@ -17,13 +17,13 @@ datasets:
   train:
     name: DIV2K
     type: RealESRGANPairedDataset
-    dataroot_gt: datasets/DF2K
-    dataroot_lq: datasets/DF2K
-    meta_info: datasets/DF2K/meta_info/meta_info_DIV2K_sub_pair.txt
+    dataroot_gt: /mnt/d/Dev/Projects/Lume/super_resolution/datasets/output/original_imgs
+    dataroot_lq: /mnt/d/Dev/Projects/Lume/super_resolution/datasets/input/splited_images
+    meta_info: /mnt/d/Dev/Projects/Lume/super_resolution/datasets/meta_info_pair.txt
     io_backend:
       type: disk
 
-    gt_size: 256
+    gt_size: 64
     use_hflip: True
     use_rot: False
 
@@ -46,11 +46,12 @@ datasets:
 # network structures
 network_g:
   type: RRDBNet
-  num_in_ch: 3
-  num_out_ch: 3
+  num_in_ch: 1
+  num_out_ch: 1
   num_feat: 64
   num_block: 23
   num_grow_ch: 32
+  scale: 1 # https://github.com/xinntao/Real-ESRGAN/issues/540#issuecomment-1574654007
 
 network_d:
   type: UNetDiscriminatorSN
@@ -61,9 +62,9 @@ network_d:
 # path
 path:
   # use the pre-trained Real-ESRNet model
-  pretrain_network_g: experiments/pretrained_models/RealESRNet_x4plus.pth
+  pretrain_network_g: experiments/pretrained_models/RealESRGAN_x4plus.pth
   param_key_g: params_ema
-  strict_load_g: true
+  strict_load_g: false
   pretrain_network_d: experiments/pretrained_models/RealESRGAN_x4plus_netD.pth
   param_key_d: params
   strict_load_d: true

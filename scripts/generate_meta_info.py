@@ -7,7 +7,7 @@ import os
 def main(args):
     txt_file = open(args.meta_info, 'w')
     for folder, root in zip(args.input, args.root):
-        img_paths = sorted(glob.glob(os.path.join(folder, '*')))
+        img_paths = sorted(glob.glob(os.path.join(folder, '*'))) # /mnt/d/Dev/Projects/Lume/super_resolution/datasets/train/*
         for img_path in img_paths:
             status = True
             if args.check:
@@ -25,6 +25,7 @@ def main(args):
                 img_name = os.path.relpath(img_path, root)
                 print(img_name)
                 txt_file.write(f'{img_name}\n')
+                # txt_file.write(f'{img_path}\n')
 
 
 if __name__ == '__main__':
@@ -37,16 +38,19 @@ if __name__ == '__main__':
         '--input',
         nargs='+',
         default=['datasets/DF2K/DF2K_HR', 'datasets/DF2K/DF2K_multiscale'],
+        # default=['/mnt/d/Dev/Projects/Lume/super_resolution/datasets', 'datasets/DF2K/DF2K_multiscale'],
         help='Input folder, can be a list')
     parser.add_argument(
         '--root',
         nargs='+',
         default=['datasets/DF2K', 'datasets/DF2K'],
+        # default=['/mnt/d/Dev/Projects/Lume/super_resolution/datasets', '/mnt/d/Dev/Projects/Lume/super_resolution/datasets'],
         help='Folder root, should have the length as input folders')
     parser.add_argument(
         '--meta_info',
         type=str,
         default='datasets/DF2K/meta_info/meta_info_DF2Kmultiscale.txt',
+        # default='/mnt/d/Dev/Projects/Lume/super_resolution/datasets/meta_info_train.txt',
         help='txt path for meta info')
     parser.add_argument('--check', action='store_true', help='Read image to check whether it is ok')
     args = parser.parse_args()

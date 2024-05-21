@@ -56,6 +56,7 @@ def main():
 
     # determine models according to model names
     args.model_name = args.model_name.split('.')[0]
+    print(args.model_name)
     if args.model_name == 'RealESRGAN_x4plus':  # x4 RRDBNet model
         model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=4)
         netscale = 4
@@ -89,6 +90,7 @@ def main():
         model_path = args.model_path
     else:
         model_path = os.path.join('weights', args.model_name + '.pth')
+        print(model_path)
         if not os.path.isfile(model_path):
             ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
             for url in file_url:
@@ -104,6 +106,7 @@ def main():
         dni_weight = [args.denoise_strength, 1 - args.denoise_strength]
 
     # restorer
+    print(netscale)
     upsampler = RealESRGANer(
         scale=netscale,
         model_path=model_path,
