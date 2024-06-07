@@ -161,6 +161,7 @@ def train_pipeline(root_path):
             data_timer.start()
             iter_timer.start()
             train_data = prefetcher.next()
+            
         # end of iter
 
     # end of epoch

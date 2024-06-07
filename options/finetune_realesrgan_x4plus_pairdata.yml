@@ -1,7 +1,7 @@
 # general settings
 name: finetune_RealESRGANx4plus_400k_pairdata
 model_type: RealESRGANModel
-scale: 1
+scale: 4
 num_gpu: auto
 manual_seed: 0
 
@@ -51,7 +51,7 @@ network_g:
   num_feat: 64
   num_block: 23
   num_grow_ch: 32
-  scale: 1 # https://github.com/xinntao/Real-ESRGAN/issues/540#issuecomment-1574654007
+  scale: 4 # https://github.com/xinntao/Real-ESRGAN/issues/540#issuecomment-1574654007
 
 network_d:
   type: UNetDiscriminatorSN

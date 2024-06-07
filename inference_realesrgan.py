@@ -106,6 +106,9 @@ def main():
         dni_weight = [args.denoise_strength, 1 - args.denoise_strength]
 
     # restorer
+    model = RRDBNet(num_in_ch=3, num_out_ch=3, num_feat=64, num_block=23, num_grow_ch=32, scale=4)
+    netscale = 4
+
     print(netscale)
     upsampler = RealESRGANer(
         scale=netscale,

@@ -92,7 +92,6 @@ class RealESRGANDataset(data.Dataset):
         retry = 3
         while retry > 0:
             try:
-                # print(f"======>{gt_path}") # /mnt/d/Dev/Projects/Lume/super_resolution/datasets/train/02_frame_005601_reflectance.png
                 img_bytes = self.file_client.get(gt_path, 'gt')
             except (IOError, OSError) as e:
                 logger = get_root_logger()
